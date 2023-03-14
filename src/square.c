@@ -11,6 +11,18 @@
 
 int main(int argc, char *argv[])
 {
+int side = 0;
 
-  return 0;
+
+if (argc != 2){
+	printf("Incorrect number of arguments provided.\n");
+	return 0;
+}
+
+
+while (scanf("%d", &side) != EOF){
+	printf("%d %s\n", square_area(side), argv[1]);
+}
+
+return 0;
 }

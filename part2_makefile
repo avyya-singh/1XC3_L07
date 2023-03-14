@@ -1,0 +1,28 @@
+# Variables
+CC = gcc
+CFLAGS = -Wall
+BUILD_DIR = build
+SRC_DIR = src
+
+# Rules
+
+all: $(BUILD_DIR)/max $(BUILD_DIR)/multiply $(BUILD_DIR)/square
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+$(BUILD_DIR)/library.o: $(SRC_DIR)/library.c | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/max: $(SRC_DIR)/max.c $(SRC_DIR)/library.o | $(BUILD_DIR)
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(BUILD_DIR)/multiply: $(SRC_DIR)/multiply.c $(SRC_DIR)/library.o | $(BUILD_DIR)
+	$(CC) $(CFLAGS) $^ -o $@
+
+$(BUILD_DIR)/square: $(SRC_DIR)/square.c $(SRC_DIR)/library.o | $(BUILD_DIR)
+	$(CC) $(CFLAGS) $^ -o $@
+
+clean:
+	rm -rf $(BUILD_DIR)
+.PHONY: all clean
